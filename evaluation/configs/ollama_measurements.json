@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "planned_no_results",
+  "server": {
+    "base_url": "http://127.0.0.1:11434",
+    "version": "RECORD_AT_RUN_TIME"
+  },
+  "model_classes": [
+    {
+      "id": "qwen2.5-coder-3b-mvp-baseline",
+      "role": "implemented_experiment_pending_baseline_not_winner",
+      "model": "qwen2.5-coder:3b",
+      "digest": "RECORD_AT_RUN_TIME",
+      "quantization": "RECORD_AT_RUN_TIME"
+    },
+    {
+      "id": "7b-candidate",
+      "role": "candidate_not_selected",
+      "model": "SELECT_INSTALLED_7B_INSTRUCT_MODEL",
+      "digest": "RECORD_AT_RUN_TIME",
+      "quantization": "RECORD_AT_RUN_TIME"
+    }
+  ],
+  "context_windows_to_test": [2048, 4096, 8192, 16384],
+  "generation": {
+    "transport": "ollama_api_generate",
+    "stream": false,
+    "temperature": 0,
+    "top_p": 0.9,
+    "seed": 42,
+    "max_output_tokens": 512
+  },
+  "protocol": {
+    "warmup_runs": 2,
+    "measured_repetitions": 5,
+    "concurrency": [1, 2, 4],
+    "record_cold_start": true
+  },
+  "measure": [
+    "load_duration_ms",
+    "prompt_tokens",
+    "prompt_eval_tokens_per_second",
+    "output_tokens",
+    "generation_tokens_per_second",
+    "time_to_first_token_ms",
+    "end_to_end_latency_ms",
+    "peak_process_rss_mb",
+    "peak_gpu_memory_mb",
+    "context_truncation",
+    "citation_validity",
+    "abstention_decision"
+  ],
+  "hardware_metadata": [
+    "os_version",
+    "cpu_model",
+    "cpu_core_count",
+    "ram_gb",
+    "gpu_model",
+    "gpu_memory_gb",
+    "accelerator_backend"
+  ],
+  "results": null
+}

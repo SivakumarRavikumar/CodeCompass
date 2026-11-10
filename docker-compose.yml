@@ -1,0 +1,46 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.12.6
+    restart: unless-stopped
+    volumes:
+      - qdrant-data:/qdrant/storage
+
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    depends_on:
+      - qdrant
+    environment:
+      CODECOMPASS_DATABASE_URL: sqlite+aiosqlite:////app/data/codecompass.db
+      CODECOMPASS_QDRANT_URL: http://qdrant:6333
+      CODECOMPASS_LLM_BACKEND: ${CODECOMPASS_LLM_BACKEND:-ollama}
+      CODECOMPASS_BEDROCK_MODEL_ID: ${CODECOMPASS_BEDROCK_MODEL_ID:-}
+      CODECOMPASS_BEDROCK_REGION: ${CODECOMPASS_BEDROCK_REGION:-us-east-1}
+      CODECOMPASS_OLLAMA_URL: http://host.docker.internal:11434
+      CODECOMPASS_OLLAMA_MODEL: ${CODECOMPASS_OLLAMA_MODEL:-qwen2.5-coder:3b}
+      CODECOMPASS_EMBEDDING_MODEL: ${CODECOMPASS_EMBEDDING_MODEL:-sentence-transformers/all-MiniLM-L6-v2}
+      CODECOMPASS_EMBEDDING_MODEL_REVISION: ${CODECOMPASS_EMBEDDING_MODEL_REVISION:-1110a243fdf4706b3f48f1d95db1a4f5529b4d41}
+      CODECOMPASS_EMBEDDING_DIMENSIONS: ${CODECOMPASS_EMBEDDING_DIMENSIONS:-384}
+      CODECOMPASS_CORS_ORIGINS: '["http://localhost:5173","http://localhost:8080"]'
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - backend-data:/app/data
+      - model-cache:/home/appuser/.cache
+    ports:
+      - "127.0.0.1:8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "127.0.0.1:8080:80"
+
+volumes:
+  backend-data:
+  model-cache:
+  qdrant-data:

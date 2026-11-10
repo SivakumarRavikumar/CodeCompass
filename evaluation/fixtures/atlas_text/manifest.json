@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "fixture_id": "atlas_text",
+  "fixture_version": "1.0.0",
+  "provenance": "Synthetic local fixture authored for CodeCompass evaluation; not a public benchmark.",
+  "license": "CC0-1.0",
+  "language": "Python",
+  "python_requires": ">=3.11",
+  "files": [
+    {
+      "path": "atlas_text/normalize.py",
+      "sha256": "e758a52baca5e10e0581949d1b776e85d8a00ee3855ca33478677696953b6d9b"
+    },
+    {
+      "path": "atlas_text/catalog.py",
+      "sha256": "89fa6711660d405ab3449c6e8b5b82ba98d6a0b4bb7abb5516b01825969f7cd3"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "feea38a7bb20ca313cfe27f198c552d4e26d6d9635db5fb5e3e369b3b34b2829"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "dataset_version": "1.0.0",
+  "split": "heldout",
+  "questions": [
+    {
+      "id": "heldout-atlas-001",
+      "split": "heldout",
+      "fixture": "atlas_text",
+      "category": "behavior",
+      "question": "Does slug creation preserve the title's letter case?",
+      "answerable": true,
+      "expected_evidence": [
+        {"path": "atlas_text/normalize.py", "symbol": "slugify", "line_span": [11, 13]}
+      ],
+      "notes": "It lowercases after normalization."
+    },
+    {
+      "id": "heldout-atlas-002",
+      "split": "heldout",
+      "fixture": "atlas_text",
+      "category": "symbol_location",
+      "question": "Where can a caller look up a document without raising for a missing identifier?",
+      "answerable": true,
+      "expected_evidence": [
+        {"path": "atlas_text/catalog.py", "symbol": "Catalog.get", "line_span": [26, 27]}
+      ],
+      "notes": "Catalog.get returns the dictionary lookup result."
+    },
+    {
+      "id": "heldout-atlas-003",
+      "split": "heldout",
+      "fixture": "atlas_text",
+      "category": "unanswerable",
+      "question": "What authentication method protects the catalog API?",
+      "answerable": false,
+      "expected_evidence": [],
+      "notes": "The fixture has no API or authentication implementation."
+    },
+    {
+      "id": "heldout-beacon-001",
+      "split": "heldout",
+      "fixture": "beacon_jobs",
+      "category": "behavior",
+      "question": "Which exceptions trigger another job attempt?",
+      "answerable": true,
+      "expected_evidence": [
+        {"path": "beacon_jobs/runner.py", "symbol": "run_job", "line_span": [8, 18]}
+      ],
+      "notes": "Only RuntimeError is caught."
+    },
+    {
+      "id": "heldout-beacon-002",
+      "split": "heldout",
+      "fixture": "beacon_jobs",
+      "category": "behavior",
+      "question": "What happens when an attempt number exceeds the retry policy?",
+      "answerable": true,
+      "expected_evidence": [
+        {"path": "beacon_jobs/retry.py", "symbol": "RetryPolicy.delay_for", "line_span": [11, 15]}
+      ],
+      "notes": "A ValueError is raised."
+    },
+    {
+      "id": "heldout-beacon-003",
+      "split": "heldout",
+      "fixture": "beacon_jobs",
+      "category": "dependencies",
+      "question": "What Python version and runtime dependencies are declared?",
+      "answerable": true,
+      "expected_evidence": [
+        {"path": "pyproject.toml", "symbol": null, "line_span": [1, 5]}
+      ],
+      "notes": "Python 3.11 or newer and an empty runtime dependency list."
+    }
+  ]
+}

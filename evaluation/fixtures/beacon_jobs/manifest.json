@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "fixture_id": "beacon_jobs",
+  "fixture_version": "1.0.0",
+  "provenance": "Synthetic local fixture authored for CodeCompass evaluation; not a public benchmark.",
+  "license": "CC0-1.0",
+  "language": "Python",
+  "python_requires": ">=3.11",
+  "files": [
+    {
+      "path": "beacon_jobs/retry.py",
+      "sha256": "3ac0f2c2e9caddccf98e1c398cfa0225e04437b615516dd91f6aee2cf25cff2c"
+    },
+    {
+      "path": "beacon_jobs/runner.py",
+      "sha256": "324cec180e396056f33be97906a7dbc7d4b6b0f0ef16f65fcc9c596e88aed720"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "bc002b8677af468629a6192ff28fc80c6dfd2b450bb92834d242aedee9fe0a83"
+    }
+  ]
+}

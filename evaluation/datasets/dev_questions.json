@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "dataset_version": "1.0.0",
+  "split": "development",
+  "questions": [
+    {
+      "id": "dev-atlas-001",
+      "split": "development",
+      "fixture": "atlas_text",
+      "category": "behavior",
+      "question": "How does title normalization handle surrounding and repeated whitespace?",
+      "answerable": true,
+      "expected_evidence": [
+        {"path": "atlas_text/normalize.py", "symbol": "normalize_title", "line_span": [4, 8]}
+      ],
+      "notes": "Should identify trim plus whitespace collapse and avoid claiming lowercasing."
+    },
+    {
+      "id": "dev-atlas-002",
+      "split": "development",
+      "fixture": "atlas_text",
+      "category": "symbol_location",
+      "question": "Where are duplicate document identifiers rejected?",
+      "answerable": true,
+      "expected_evidence": [
+        {"path": "atlas_text/catalog.py", "symbol": "Catalog.add", "line_span": [20, 24]}
+      ],
+      "notes": "Expected location is Catalog.add."
+    },
+    {
+      "id": "dev-atlas-003",
+      "split": "development",
+      "fixture": "atlas_text",
+      "category": "dependencies",
+      "question": "Which external runtime libraries does this package require?",
+      "answerable": true,
+      "expected_evidence": [
+        {"path": "pyproject.toml", "symbol": null, "line_span": [1, 5]}
+      ],
+      "notes": "The declared runtime dependency list is empty."
+    },
+    {
+      "id": "dev-beacon-001",
+      "split": "development",
+      "fixture": "beacon_jobs",
+      "category": "behavior",
+      "question": "What backoff formula does the retry policy use?",
+      "answerable": true,
+      "expected_evidence": [
+        {"path": "beacon_jobs/retry.py", "symbol": "RetryPolicy.delay_for", "line_span": [11, 15]}
+      ],
+      "notes": "Base delay multiplied by two to the attempt-minus-one power."
+    },
+    {
+      "id": "dev-beacon-002",
+      "split": "development",
+      "fixture": "beacon_jobs",
+      "category": "architecture",
+      "question": "How does the runner connect execution to retry configuration?",
+      "answerable": true,
+      "expected_evidence": [
+        {"path": "beacon_jobs/runner.py", "symbol": "run_job", "line_span": [8, 18]},
+        {"path": "beacon_jobs/retry.py", "symbol": "RetryPolicy", "line_span": [7, 15]}
+      ],
+      "notes": "Runner consumes RetryPolicy for attempt count and delay validation."
+    },
+    {
+      "id": "dev-beacon-003",
+      "split": "development",
+      "fixture": "beacon_jobs",
+      "category": "unanswerable",
+      "question": "Which database stores completed jobs in production?",
+      "answerable": false,
+      "expected_evidence": [],
+      "notes": "No persistence or production database exists in this fixture."
+    }
+  ]
+}

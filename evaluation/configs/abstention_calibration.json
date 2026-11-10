@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "status": "planned_no_results",
+  "calibration_split": "development",
+  "heldout_use": "apply_frozen_thresholds_only",
+  "implemented_baseline": {
+    "pre_generation_signal": "top_fused_rrf_score",
+    "threshold": 0.015,
+    "status": "experiment_pending_not_calibrated",
+    "post_generation_rule": "abstain_when_no_valid_server_resolved_citation_label"
+  },
+  "signals": [
+    "top_fused_rrf_score",
+    "retrieval_has_candidates",
+    "valid_server_resolved_citation_count"
+  ],
+  "threshold_sweeps": {
+    "top_fused_rrf_score": [0.01, 0.0125, 0.015, 0.0175, 0.02, 0.025, 0.03],
+    "minimum_valid_server_resolved_citations": [1]
+  },
+  "objective": {
+    "primary": "maximize_answerability_accuracy",
+    "constraint": "unanswerable_abstention_rate >= 0.80",
+    "tie_breaker": "higher_answerable_coverage"
+  },
+  "report": [
+    "coverage",
+    "selective_retrieval_accuracy",
+    "answerability_accuracy",
+    "unanswerable_abstention_rate",
+    "confusion_counts"
+  ],
+  "selected_thresholds": null,
+  "results": null
+}

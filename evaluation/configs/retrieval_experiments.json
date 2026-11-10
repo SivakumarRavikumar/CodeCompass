@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "status": "planned_no_results",
+  "purpose": "Compare chunking and embedding candidates within the implemented SQLite FTS5 plus Qdrant RRF architecture on development questions before one held-out run.",
+  "common": {
+    "top_k": [3, 5, 10],
+    "lexical_backend": "sqlite_fts5",
+    "dense_backend": "qdrant",
+    "dense_distance": "cosine",
+    "fusion": "reciprocal_rank_fusion",
+    "rrf_k": 60,
+    "reranker": null,
+    "normalize_embeddings": true,
+    "degraded_mode": "sqlite_fts5_lexical_only"
+  },
+  "chunking_candidates": [
+    {
+      "id": "fixed-80-20",
+      "strategy": "fixed_lines",
+      "max_lines": 80,
+      "overlap_lines": 20
+    },
+    {
+      "id": "python-symbol-120-15",
+      "strategy": "python_symbol",
+      "max_lines": 120,
+      "fallback_overlap_lines": 15,
+      "python_scope": "top_level_ast_nodes"
+    },
+    {
+      "id": "python-symbol-200-30",
+      "strategy": "python_symbol",
+      "max_lines": 200,
+      "fallback_overlap_lines": 30,
+      "python_scope": "top_level_ast_nodes"
+    }
+  ],
+  "embedding_candidates": [
+    {
+      "id": "all-minilm-l6-v2-mvp-baseline",
+      "role": "implemented_experiment_pending_baseline_not_winner",
+      "provider": "sentence_transformers",
+      "model": "sentence-transformers/all-MiniLM-L6-v2",
+      "dimensions": 384,
+      "revision": "PIN_BEFORE_RUN"
+    },
+    {
+      "id": "bge-small-en-v1.5-candidate",
+      "role": "candidate_requires_configuration_change",
+      "provider": "sentence_transformers",
+      "model": "BAAI/bge-small-en-v1.5",
+      "dimensions": 384,
+      "revision": "PIN_BEFORE_RUN"
+    },
+    {
+      "id": "nomic-embed-text-v1.5-candidate",
+      "role": "candidate_requires_configuration_and_dimension_change",
+      "provider": "sentence_transformers",
+      "model": "nomic-ai/nomic-embed-text-v1.5",
+      "dimensions": 768,
+      "revision": "PIN_BEFORE_RUN"
+    }
+  ],
+  "selection_rule": "Choose on development retrieval hit@k, citation support potential, p95 latency, and memory; freeze before held-out.",
+  "results": null
+}
